@@ -4,6 +4,7 @@ import com.miu.data.BorrowingRepository;
 import com.miu.domain.Borrowing;
 import com.miu.service.dto.BookDto;
 import com.miu.service.dto.BookQueryDto;
+import com.miu.service.dto.BorrowingDto;
 import com.miu.service.dto.CustomerDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,19 @@ public class BorrowingServiceImpl implements BorrowingService{
             return borrowing;
         }).collect(Collectors.toList());
         borrowingRepository.saveAll(test);
+    }
+
+    @Override
+    public Borrowings getAllBorrowing() {
+        List<Borrowing> borrowingList = borrowingRepository.findAll();
+        List<BorrowingDto> borrowingDtoList = borrowingList.stream().map(
+                borrowing -> {
+                   BorrowingDto borrowingDto = BorrowingAdapter.getBorrowingDto(borrowing);
+                    return borrowingDto;
+                }
+        ).collect(Collectors.toList());
+        Borrowings borrowings = new Borrowings(borrowingDtoList);
+        return borrowings;
     }
 
     @FeignClient( name = "ClientService")

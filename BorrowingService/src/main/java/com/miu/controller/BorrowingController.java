@@ -3,6 +3,7 @@ package com.miu.controller;
 import com.miu.domain.Borrowing;
 import com.miu.service.BorrowRequest;
 import com.miu.service.BorrowingService;
+import com.miu.service.Borrowings;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,5 +23,9 @@ public class BorrowingController {
     @GetMapping("/{borrowingNumber}")
     public Borrowing getBorrowing(@PathVariable int borrowingNumber){
         return borrowingService.getBorrowing(borrowingNumber);
+    }
+    @GetMapping()
+    public Borrowings getAllBorrowing(){
+        return borrowingService.getAllBorrowing();
     }
 }

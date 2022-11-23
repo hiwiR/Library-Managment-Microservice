@@ -12,4 +12,6 @@ public interface BorrowingService {
     void updateCustomer(CustomerDto customerDto);
 
     void updateBook(BookDto bookDto);
+
+    Borrowings getAllBorrowing();
 }
