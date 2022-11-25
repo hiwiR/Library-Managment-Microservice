@@ -106,7 +106,7 @@ public class ClientApplication implements CommandLineRunner {
 
 		}
 		System.out.println("***********************************Get Updated Borrowing information****************************************  ");
-		Borrowings borrowings = restTemplate.getForObject("http://localhost:8087/borrowing",Borrowings.class);
+		Borrowings borrowings = restTemplate.getForObject("http://localhost:8087/borrowings",Borrowings.class);
 		if(borrowings.getBorrowingDto() != null ){
 			borrowings.getBorrowingDto().stream().filter(borrowingDto -> borrowingDto.getIsbn().equals("002"))
 							.forEach(borrowingDto -> {
